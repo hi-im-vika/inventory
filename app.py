@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -30,6 +31,24 @@ class Item(db.Model):
             'count': self.count,
             'desc': self.desc,
             'is_low': self.count <= self.low_stock_threshold
+        }
+
+class CountLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    delta = db.Column(db.Integer, nullable=False)          # +1 or -3 etc.
+    count_after = db.Column(db.Integer, nullable=False)    # count after this change
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    note = db.Column(db.String(200))                       # optional, "restocked before event"
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'item_id': self.item_id,
+            'delta': self.delta,
+            'count_after': self.count_after,
+            'timestamp': self.timestamp.isoformat(),
+            'note': self.note
         }
 
 @app.route("/")
