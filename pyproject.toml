@@ -5,5 +5,7 @@ description = "Simple inventory app in Python"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "dotenv>=0.9.9",
     "flask>=3.1.3",
+    "flask-sqlalchemy>=3.1.1",
 ]
