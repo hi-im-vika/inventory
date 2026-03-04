@@ -1,0 +1,9 @@
+[project]
+name = "inventory"
+version = "0.1.0"
+description = "Simple inventory app in Python"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.3",
+]
