@@ -218,6 +218,5 @@ __marimo__/
 # IDE files
 .idea/
 
-data/
 .postman/
 postman/
