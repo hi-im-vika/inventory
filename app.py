@@ -51,6 +51,9 @@ class CountLog(db.Model):
             'note': self.note
         }
 
+with app.app_context():
+    db.create_all()     # create database if not yet existing
+
 @app.route("/")
 def home():
     return render_template("index.html")
