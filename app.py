@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from datetime import datetime
@@ -57,6 +57,28 @@ with app.app_context():
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/api/items", methods=['GET', 'POST'])
+def api_items():
+    if request.method == 'GET':
+        items = []
+        for item in Item.query.all():
+            items.append(item.to_dict())
+        return jsonify(items), 200
+
+    if request.method == 'POST':
+        data = request.get_json()
+        item = Item(
+            name=data['name'],
+            category=data.get('category'),
+            unit=data.get('unit'),
+            count=data.get('count', 0),
+            desc=data.get('desc'),
+            low_stock_threshold=data.get('low_stock_threshold', 5)
+        )
+        db.session.add(item)
+        db.session.commit()
+        return jsonify(item.to_dict()), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
