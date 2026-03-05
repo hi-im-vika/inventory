@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from datetime import datetime
@@ -56,7 +56,7 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return app.send_static_file("index.html")
 
 @app.route("/api/items", methods=['GET', 'POST'])
 def api_items():
