@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f0f0f0;
+  color: #222;
+}
+
+header {
+  background: #222;
+  color: white;
+  padding: 16px 24px;
+}
+
+main {
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.card .count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.card .unit {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.card.low {
+  border: 2px solid #f0a500;
+}
+
+.card.empty {
+  border: 2px solid #e53935;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.buttons button {
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+}
+
+.buttons button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
